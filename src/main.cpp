@@ -55,9 +55,43 @@ int main() {
 
   file.close();
 
-  Department department = searchWord(departments, "LUCRO");
+  int option = -1;
 
-  std::cout << department.getDepartment() << std::endl;
+  while (option != 0) {
+    std::cout << "\n===== MENU =====" << std::endl;
+    std::cout << "1 - Buscar departamento" << std::endl;
+    std::cout << "2 - Buscar palavra-chave" << std::endl;
+    std::cout << "0 - Sair" << std::endl;
+    std::cout << "Opcao: ";
+    std::cin >> option;
+
+    if (option == 1) {
+      std::string name;
+      std::cout << "Nome do departamento: ";
+      std::cin >> name;
+
+      Department department = searchDepartmentData(departments, name);
+      std::cout << std::endl;
+      if (department.getCode() == "") std::cout << "Departamento chave nao encontrado." << std::endl;
+      else std::cout << department.getDepartment() << std::endl;
+    }
+
+    else if (option == 2) {
+      std::string word;
+      std::cout << "Palavra-chave: ";
+      std::cin >> word;
+      Department department = searchWord(departments, word);
+
+      std::cout << std::endl;
+
+      if (department.getCode() == "") std::cout << "Palavra chave nao encontrada." << std::endl;
+      else std::cout << department.getDepartment() << std::endl;
+    }
+
+    else if (option != 0) {
+      std::cout << "Opcao invalida." << std::endl;
+    }
+  }
 
   return 0;
 }
