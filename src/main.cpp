@@ -22,14 +22,21 @@ Department getDepartmentFromLine(std::string line) {
   return department;
 }
 
+Department searchDepartmentData(std::vector<Department> departments, std::string name) {
+  for (int i = 0; i < departments.size(); i++) {
+    if (departments[i].getName() == name) {
+      return departments[i];
+    }
+  }
+
+  return Department("", "");
+}
+
 int main() {
   std::vector<Department> departments;
   std::ifstream file("./arquivo.txt");
   std::string line;
-  if (!file.is_open()) {
-    std::cout << "Error opening file!" << std::endl;
-    return 1;
-}
+  
   while (std::getline(file, line)) {
     Department department = getDepartmentFromLine(line);
     departments.push_back(department);
@@ -37,9 +44,9 @@ int main() {
 
   file.close();
 
-  for (int i = 0; i < departments.size(); i++) {
-    std::cout << departments[i].getDepartment() << std::endl << std::endl;
-  }
+  Department department = searchDepartmentData(departments, "FINANCEIRO");
+
+  std::cout << department.getDepartment() << std::endl;
 
   return 0;
 }
