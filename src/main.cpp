@@ -1,7 +1,10 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
 #include <sstream>
 
-#include "./classes/department/department.h"
+#include "classes/department/department.h"
 
 Department getDepartmentFromLine(std::string line) {
   std::stringstream ss(line);
@@ -20,10 +23,23 @@ Department getDepartmentFromLine(std::string line) {
 }
 
 int main() {
-  std::string line = "001 JURÍDICO INVESTIMENTO RENDA GASTOS DESPESAS LUCRO";
+  std::vector<Department> departments;
+  std::ifstream file("./arquivo.txt");
+  std::string line;
+  if (!file.is_open()) {
+    std::cout << "Error opening file!" << std::endl;
+    return 1;
+}
+  while (std::getline(file, line)) {
+    Department department = getDepartmentFromLine(line);
+    departments.push_back(department);
+  }
 
-  Department department = getDepartmentFromLine(line);
+  file.close();
 
-  std::cout << department.getDepartment() << std::endl;
+  for (int i = 0; i < departments.size(); i++) {
+    std::cout << departments[i].getDepartment() << std::endl << std::endl;
+  }
+
   return 0;
 }
