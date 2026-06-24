@@ -32,6 +32,17 @@ Department searchDepartmentData(std::vector<Department> departments, std::string
   return Department("", "");
 }
 
+Department searchWord(std::vector<Department> departments, std::string keyword) {
+  for (int i = 0; i < departments.size(); i++) {
+    for (int j = 0; j < departments[i].getWords().size(); j++) {
+      if (departments[i].getWords()[j] == keyword) {
+        return departments[i];
+      }
+    }
+  }
+  return Department("", "");
+}
+
 int main() {
   std::vector<Department> departments;
   std::ifstream file("./arquivo.txt");
@@ -44,7 +55,7 @@ int main() {
 
   file.close();
 
-  Department department = searchDepartmentData(departments, "FINANCEIRO");
+  Department department = searchWord(departments, "LUCRO");
 
   std::cout << department.getDepartment() << std::endl;
 
