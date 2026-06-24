@@ -30,7 +30,7 @@ void Department::addWord(std::string keyword) {
 }
 
 std::string Department::getDepartment() {
-    std::string result = code + " - " + name + "\n";
+    std::string result = code + " - " + name + " ";
 
     for (int i = 0; i < words.size(); i++) {
         result += words[i] + " ";
