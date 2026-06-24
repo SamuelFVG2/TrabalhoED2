@@ -80,6 +80,7 @@ int main() {
       std::string word;
       std::cout << "Palavra-chave: ";
       std::cin >> word;
+
       Department department = searchWord(departments, word);
 
       std::cout << std::endl;
